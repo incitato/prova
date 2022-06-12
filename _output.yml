@@ -1,0 +1,36 @@
+bookdown::gitbook:
+  dev: svglite
+  css: style.css
+  split_by: section
+  config:
+    toc:
+      collapse: none
+      before: |
+        <li><a href="./">Arts esceniques</a></li>
+    download: ["pdf", "epub"]
+    edit: https://github.com/incitato/prova/edit/main/%s
+    sharing:
+      github: yes
+      facebook: false
+      twitter: false
+    search:
+      engine: fuse
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  #  before_body: before_body.tex
+  #  after_body: after_body.tex
+  latex_engine: xelatex
+  dev: "cairo_pdf"
+  template: null
+  keep_tex: yes
+  fig_crop: false
+  citation_package: natbib
+  pandoc_args: [--top-level-division=chapter, --wrap=none]
+  toc_depth: 3
+  toc_unnumbered: no
+  toc_appendix: yes
+  quote_footer: ["\\VA{", "}{}"]
+bookdown::epub_book:
+  dev: svglite
+  stylesheet : style.css

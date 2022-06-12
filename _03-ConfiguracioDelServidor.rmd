@@ -1,0 +1,54 @@
+# Configuració del servidor
+
+Descriurem com seria la posada en funcionament del servidor.
+
+Per dur a terme aquest projecte anem a fer una simulació en una màquina virtual en un Ubuntu server que descarregarem [d'Ubuntu server](https://ubuntu.com/download/server). I simularem que tenim 3 discs durs per a fer un RAID.
+
+[Ubuntu en raid](https://tonyfernandeztech.wordpress.com/2021/04/27/installing-ubuntu-20-04-with-software-raid-1/)
+
+Anem a fer la instal·lació en format [RAID](https://en.wikipedia.org/wiki/Standard_RAID_levels) 5, farien falta 3 discos, però ens assegurem recuperació contra fallades, es pot fer també amb raid 0 on augmenta la velocitat, però no tenim recuperació en fallides d'un disc, es perd tot.
+
+Hem de decidir si volem el tipus 0, on es té tot l'espai dels discs durs, i augmentem la velocitat de funcionament, o fem un 5 on l'espai d'un dels discs es perd per a fer còpia de paritat, i no és tan ràpid, pel tipus d'empresa, la velocitat punta del 0 no és necessària, i jo primaria la seguretat.
+
+*Recomane el tipus 5.*
+
+Hem de comprar 3 hd sata depen de la mida valdrà un preu, per exemple [WD Blue 2TB SATA](https://www.amazon.es/Blue-256MB-3-5IN-SATA-Sint/dp/B08VH8R94B/ref=sr_1_4?hvadid=79852063937015&hvbmt=be&hvdev=c&hvqmt=e&keywords=hd+2tb+interno&qid=1650128602&refinements=p_n_size_browse-bin%3A10858611031&rnid=949713031&s=computers&sr=1-4) està en Amazon per 44 euros, per 3 discs, 132 euros, i tindríem una capacitat d'emmagatzemament de 4 TB en recuperació si falla un. Si no, es compren 2 per 88 i no fem un tipus 0.
+
+::: {.rmdnote data-latex="{No es el nostre cas}"}
+Exemple de configuració de [RAID 1](https://tonyfernandeztech.wordpress.com/2021/04/27/installing-ubuntu-20-04-with-software-raid-1/) en aquest tipus es fa una còpia espill dels discs. es perd el 50% de l'espai total per fer la còpia, no crec que interesse. *No es el cas que ens interessa.*
+:::
+
+::: {.rmdinfo data-latex="{Muntar un RAID 5}"}
+Aci tenim com muntar un [RAID 5 en Ubuntu](https://www.tutorialspoint.com/how-to-create-a-raid-5-storage-array-with-mdadm-on-ubuntu-16-04), ja en funcionament. Nosaltres començarem des de zero, fent una instal·lació neta.
+:::
+
+Mira açò, igual es millor fer un vlm i posar raid després, o formatar en [btrsf](https://help.ubuntu.com/community/btrfs) [LVM+RAID](https://hetmanrecovery.com/recovery_news/how-to-create-software-raid-5-with-lvm.htm)
+
+Possibilitat de no fer un RAID , fer un lvm en diversos discs i posar sistema de fitxer btrfs en compressió, encara que si el que es guarda es majoritàriament vídeos, no te massa sentit, es perd un poc de rendiment, i si el server no es massa potent, no valdria la pena, te millores en la recuperació d'erros, i em pareix millor per a un sistema en poc manteniment per al futur.
+
+*El que cal pensar ara* és, sistema en home en espai per a usuaris, o muntar en mnt/espai perquè es guarden els vídeos.
+
+-   Per una part, tindre carpetes d'usuaris, estaria be, si es posa al final servidor web, i fer que cada usuari servisca des del seu directori públic, o montar el directori per xarxa, per què guarden allí fitxers de recuperació.
+-   El més segur es que no ho gasten mai. L'opció de fer sol servidor de disc dur, i posar allí una carpeta perquè colguen el que es vol servir per web interna, igual seria millor opció.
+
+::: {.rmdnote data-latex="{No és el nostre cas}"}
+Més que res, és pe a l'hora de fer les particions del disc dur, li donem més a home, o posem el pes de l'espai a la partició d'espai. Clarament, les he de separar, ja que no vull que per una d'aquestes es quede cense espai i que el servidor comence anar malament o directament no funcione per falta d'espai, i més si es guarden allí les captures de reproducció en línia, que per si una d'aquestes, es queda encés, el pot deixar cense disc en poc de temps.
+:::
+
+Resoldre el problema dels permisos, que grups crear, que usuaris i que pot fer que.
+
+## Altres coses a fer
+
+-   Possible instal·lació d'un NAS
+
+-   Fer les funcions de NAS en el mateix servidor, fer RAID, depenent del pressupost, fer un de tipus 0, 1 o 5.
+
+-   Configurar un DNS en el servidor.
+
+-   Configurar un DHCP, de moment ho descartem, si anara a més el wifi en la sala, i es vulga fer més interaccions amb el públic, seria per a estudiar, soles per al número d'ordinador del centre, amb IP fixes, va que el mates.
+
+-   Servidor d'impressió, Configurar el server com a servidor d'impressió.
+
+-   Configurar un servidor web, per als serveis que es poden posar.
+
+-   La web de, es poden posar WordPress per a cada usuari, perquè facen les seues proves, o intentar convèncer de les bondats d'Hugo o Jenkyll, estudiar la seua configuració, creació d'un tema adequat per a la sala, i explicar la forma que el puguen gastar.

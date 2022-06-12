@@ -1,0 +1,30 @@
+# Desenvolupament Appweb
+
+*L'empresa vol personalitzar informes per a la seua comptabilitat i la demanda de subvencions, on es reflectiran el nombre d'obres, espectadors, gasto, i fer estadístiques de l'assistència de públic i comparar en Google analític*.
+
+## Desenvolupament d'una app de gestió d'informes de la sala
+
+*Es proposa la realització d'una appweb que realitze aquestes tasque.*
+
+En principi, seria mitjançant una base de dades, on introduir els valors que recopile l'empesa, i un entorn web on es puguen fer consultes i redactar informes.
+
+> Pendent de resoldre, la conveniència o no de la utilització d'una base de dades, una SQLite o un fitxer json, ja que el nombre de dades no és massa elevat.  
+> Investigar com es fan aquestes coses, ja que jo soc de xarxes, no de programació.
+
+L'app es colgaria en el servidor de l'empresa, perquè es puguen fer consultes des d’allí.
+El que implica la configuració d'un servidor en la mateixa sala, on de pas posarem un servidor de dns, un de fulles web si es vol realitzar interaccions amb el públic, optatiu un de correu, i es podria imantar també un servidor git, per fer les còpies de seguretat i seguiment de versions, dels projectes com la revista que publiquen o obres de teatre, en el cas que les vulguen crear de forma col·laborativa.
+
+Després de provar diverses alternatives, com [gitlab](https://about.gitlab.com/), [Gogs](https://gogs.io/), la millor alternativa pareix ser [Gitea](https://gitea.io/en-us/), és molt lleuger, es pot instal·lar amb una base de dades SQLite, i l'entorn web que proporciona és molt paregut al de Github, i les exigències de l'empresa, no són les d'un entorn de programació.
+
+La millor opció per aquest cas és traure un compte de GitHub de l'empesa, on es guarden els projectes.
+
+### Alternatives
+
+- El projecte es pot realitzar en node.js, express i vue.js
+- [R](https://www.r-project.org/) i [shiny](https://shiny.rstudio.com/), que pareix més fàcil, el que implica la instal·lació de R en el servidor, perquè ens servisca l'aplicació.
+
+## Tasques a realitzar
+
+- S'ha d'investigar la programació de plantilles de [Latex](http://www.latextemplates.com/), per a formatjar els documents d'eixida, en el logo de l'empresa, i un format propi de redaccions d'informes.
+- El funcionament de [Pandoc](https://pandoc.org/), per a poder traure els diferents formats que necessitem, pdf, docx ...
+- Crear un xicotet doc del funcionament de markdown per a la gent de l'empresa. 

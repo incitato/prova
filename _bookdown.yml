@@ -1,0 +1,9 @@
+book_filename: "Arts_Escèniques"
+repo: https://github.com/incitato/prova
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Capitol "
+  label:
+    fig: "Imatge "
+    tab: "Taula "

@@ -1,0 +1,45 @@
+# Implantació d'entorn Git
+
+Explorar la forma d'integrar el concepte git en les arts escèniques. Explorar els avantatges del seguiment de versions, i el procés col·laboratiu per a l'elaboració de publicacions o la creació d'obres de teatre,
+
+## Implantació del sistema col·laboratiu en el desenvolupament d'obres de teatre.
+
+-   Es pot realitzar mitjançant la creació d'un compte en una de les plataformes Git que hi ha en internet,
+-   Configurant un servidor git en el mateix centre de treball
+    -   Git i un servidor web, aquesta opció es per a gastar l'entorn git en consola, no es recomana per a l'empresa.
+    -   Un entorn web, he fet proves en GitLab i Gitea, i el final crec que la millor opció és la de Gitea pel reduït gaste de recursos que fa i la facilitat d'ús.
+    -   Es pot mirar d'enllaçar el repositori git en el conte de drive que té l'empresa, per fer un repositori privat per als membres.
+
+## Beneficis de la seua implantació
+
+Els beneficis són els mateixos que per a la creació de projectes informàtics, però que son poc utilitzat en el món de les lletres. *Possibilitat de crear obres col·laboratives.*
+
+-   El guardat de les diferents versions segons va desenvolupant-se el projecte, i poder tornar en el temps si alguna cosa no va bé.
+-   Bifurcar camins d'exploració en la creació literària.
+
+## Mode de funcionament
+
+### Breu tutorial per al funcionament
+
+## Instal·lació d'un repositori en el centre
+
+Procés d'instal·lació d'un repositori de git
+
+-   Git i Apache `buscar la fulla on ho explica`
+
+-   Instal·lació de [gitea](https://docs.gitea.io/en-us/) , o bé directament, o per una imatge Docker
+
+-   Servir el [git](https://www.permikkelsen.dk/how-to-host-your-git-repository-on-onedrive.html) en un espai onedrive, pareix que és per consola, mirar algun client de git desktop que facilita les coses.
+
+## Possible implantació en el repositori en internet
+
+El més fàcil seria traure un compte en una de les plataformes que hi ha en internet, el problema és el recel que tinga l'empresa pel tema de privacitat. Aquestes plataformes tenen l'opció de crear repositoris privats, on soles es pot connectar al que convideu.
+
+## Explorar [Obsidian](https://obsidian.md/)
+
+Obsidian és un editor de notes en funcions de seguiment git, per veure diff i altres funcions. Prou interessant, o com a alternativa [Zettlr](https://www.zettlr.com/), dona error en posar diccionaris.\
+I implantació d'un servidor de [Languagetool](https://github.com/Erikvl87/docker-languagetool)
+
+## Explorar Wikimedia per a la realització d'escriptura col·laborativa
+
+L'escriptura col·laborativa mitjançant ferramentes de xarxa, com la Wikipedia, on és possible discutir els convits proposats, obrir discussions sobre el text analitzat. Es pot explorar el concepte de [Narrativa hipertextual](https://es.wikipedia.org/wiki/Narrativa_hipertextual) fent servir aquesta ferramenta.

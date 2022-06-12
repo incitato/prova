@@ -1,0 +1,114 @@
+---
+title: "Arts escèniques"
+subtitle: |
+  Projecte de pràctiques d'empresa del grau  
+  F.P. ASISX  
+  I.E. Maria Enriquez  
+  *Gandia 2022* 
+  Versio web i altres formats en https://incitato.github.io
+author: "Ramiro Palau Gregori"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: krantz
+linestretch: 1
+biblio-style: apalike
+fontsize: 10pt
+monofontoptions: "Scale=0.85"
+colorlinks: yes
+lot: false
+lof: false
+geometry: "left=3cm,right=3cm,top=0.85cm,bottom=3cm"
+links-as-notes: true
+bibliography: [book.bib, packages.bib]
+description: |
+ Projecte Asisx I.E. Maria Enriques
+link-citations: yes
+github-repo: incitato/prova
+output:
+  bookdown::pdf_book:
+    keep_tex: true
+  bookdown::epub_book:
+    stylesheet: style.css
+  bookdown::gitbook:
+    lib_dir: assets
+    config:
+      toolbar:
+        position: static
+    search:
+      # options to control/tune search engine behavior (for
+      engine: lunr # or fuse
+      # fuse.js, refer to https://fusejs.io/api/options.html)
+      options: null
+    sharing:
+      github: true
+      twitter: false
+      whatsapp: true
+---
+
+# A proposit del treball {.unnumbered}
+
+<!-- R global options: R chunk images display without code (no echo); show PDF image over JPG/PNG when available in PDF output-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.align="center")
+options(knitr.graphics.auto_pdf = TRUE)
+```
+Documentació dels projectes proposats a realitzar en el desenvolupament de les pràctiques realitzades en **Espacio Inestable**. Aquest manual servira de base per desenvolupar posteriorment un mes detallat per deixar-lo per als propers administradors de la sala..
+
+ El llibre encara està en fase de proves, igual que part de la documentació. Mes be, es una recopilació de procediments per implementar serveis, i apunts per resoldre problemes. El projecte està en fase de proves d'aprenentatge dels recursos a implantar, a punt de passar a una verdadera simulació.
+
+Es va fer una primera fase en Virtual Box, per provar els serveis i elegir els que millor s'adaptaven al propòsit del projecte. 
+Una vegada triats, vam buscar un hypervisor de tipus 1, passant a estudiar com fer-los funcionar en el nou entorn. Les alternatives van ser Xen i Proxmox, de codi lliure, elegint finalment Proxmox. La GUI per configurar-lo no ten limitacions com les que vaig trobar per a Xen, la majoria trial 30 dies, o versions incompletes community.
+
+Vam visualitzar en KVM, ja que la base de la host és una ubuntu, i encara que Proxmox està basat en Debian, i existeix un paquet .deb per instal·lar en aquesta distribució, no és compatible en Ubuntu directament. 
+
+En la tercera fase, s'instal·lara directament en Debian, i tindrem accés directe a les targetes de xarxa, no fent ponts linux a KVM i d'aci a les VM, i als discs o particions, no havent de fer volums virtuals per simular els verdaders.
+
+## Propòsit {.unnumbered}
+
+L'empresa vol desenvolupar els seguents serveis.
+
+1. Implantar un sistema d'accés a internet wifi per al públic que entre en les instal·lacions.
+2. Implantar un sistema de gravació de les obres que es representen per reproducció en continu o tindre una còpia per després editar-les.
+3. Un entorn col·laboratiu per als empleats.
+   
+Es proposa la següent solució
+
+1. Instala.lacio de dos punts d'accés wifi d'alta capacitat UniFi.
+2. Una xarxa i sistema cctv de gravació de video amb càmeres IP
+3. Un entorn de treball col·laboratiu tipus Nextcloud, que inclou serveis de missatgeria, entorn ofimàtic...
+4. Un servidor per allotjar les VM dels serveis i el NAS d'emmagatzemament dels recursos centralitzat.
+5. Instal·lacio d'una xarxa per donar accés als recursos.
+
+
+En els propers capitols s'anirà detallant la forma de portar-ho a terme.
+
+### Plan B {.unnumbered}
+
+En els capitols següents s'estudia la forma d'implementar-ho perquè siga en un futur més fàcilment escalable. El projecte ha d'estar acabat en september, i s'està a l'espera que siguen concedides les subvencions. Si correra presa per posar-lo en funcionament, directament es faria en Truenas, com a base del sistema, ja que té la capacitat de visualitzar, disposa d'alguns dels serveis com Nextcloud com a connector. Instal·lem en un Jail, i ja ho tenim configurat. La política de grups i usuaris, es pot fer des del mateix Truenas, ames del firewall, i OpneVPN. Seria una xarxa molt més simple, inclòs, no fent VPN i directament traure fora, port forwarding, els ports de Nextcloud i Zonemindre. Un RAID 1 per a les dades, per tindre redundància.
+
+Com pensava que tenia temps, craso error, m'he entretingut complicar-me la vida.
+
+## Agraïments {.unnumbered}
+
+Agraïments als tutors:
+
+Pablo Navarro Mon  
+
+Jacobo Pallares Burriel
+
+Ulisses Alonso
+
+Pels [ànims](https://www.levante-emv.com/cultura/2022/06/06/aceleremonos-66978856.html), la paciència i llibertat que m'han deixat per desenvolupar el projecte.
+
+```
+Sin noticias de Gurb (Eduardo Mendoza)
+
+- ¿qué alternativa le ves?
+- Bueno, pues quedarnos en éste.
+- ¿Y hacer qué?
+- Uf, mogollón de cosas.
+- Como por ejemplo qué.
+- Montamos un bar tú y yo.
+- Mira qué bien:
+```

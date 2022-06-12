@@ -1,0 +1,50 @@
+# Migració de les fulles web a Hugo
+
+`En principi descartat`
+
+## Avantatges de la migració
+
+*Hugo és un framework per a construir fulles estàtiques*
+
+La fulla web de l'empresa està implementada en WordPress,Hugo és una alternativa per la realització del projecte d'aquesta fulla, on el seu manteniment i implementació és molt més senzilla. Hugo és un framework on una vegada configurat el tema de la fulla, els autors de les publicacions, soles han de penjar un document de text, en format Markdown perquè aquests nou posts es publique, l'organització en carpetes i mitjançant tags ens facilita molt l'administració del lloc, a més de la seua seguretat, ja que soles compartim fulles estètiques, sense fer ús de bases de dades, reduint considerablement el seu manteniment.
+
+## Mode d'implementar la migració
+
+Una vegada que l'empresa passe la còpia de seguretat de les fulles WordPress, hi ha una forma de passar els posts a Markdown.
+
+Ordenant en diferents carpetes, per contingut temàtic i autors, on cada autor o secció te
+la seua carpeta on colgar els nous posts, en fitxer de text *md* i les imatges que vulga que apareguen.
+
+### Conversió dels posts de WordPress a md
+
+Possibles solucions per al procés
+
+- [How To Convert WordPress To Markdown](https://kevq.uk/how-to-convert-wordpress-to-markdown/)
+- [How to export a large Wordpress site to Markdown](https://swizec.com/blog/how-to-export-a-large-wordpress-site-to-markdown/)
+- [Exporting Wordpress Posts To Markdown](https://prefetch.net/blog/2017/11/24/exporting-wordpress-posts-to-markdown/)
+  
+*Quan estiguem en el cas estudiarem en més profunditat la manera de fer-ho*
+
+Estic mirant per a fer una xicoteta demostració de les característiques d'Hugo, per fer una posada en comú de com funciona, i si és factible la seua migració.
+
+Una altra possibilitat de la seua implantació, és si es realitza la instal·lació d'una zona wifi en el pati de butaques, a l'hora de donar els paràmetres de la xarxa (nom de xarxa i contrasenya), que es faria en un codi [QR](https://www.qr-code-generator.com/solutions/wifi-qr-code/) *(alguna cosa pareguda açò, ja ho desenvoluparé un poc mes en l'apartat wifi)*, es pot passar una direcció d'entrada automàtica a una fulla web, que estaria en el servidor de la xarxa local, on es pot passar informació de l'obra que és representar, o realitzar interacció amb el públic, en temps real.
+
+#### Possibles interaccions amb el públic
+
+Les fulles del servidor intern per al públic, recomane que es facen amb Hugo, ho deixaré preparat perquè siga molt fàcil la creació de fulles noves. On soles s'ha de colgar un fitxer de text en un directori determinat... bo, i compilar la fulla, però ja deixaré un script que ho faça, miraré la forma de fer-ho soles, integració continuada crec que es diu.
+Es pot fer en WordPress si vos és més fàcil, és parlar-ho i provar.
+
+- Preàmbul de l'obra que es va a representar, perquè el públic s'informe o posar en context de què van a veure, uns minuts abans que comence.
+
+- Es pot dur a terme una web app de xat per a conferències, el públic puga colgar allí les seues preguntes, i des de la taula, poder seleccionar les més interessants, o la persona a la qual es donara veu.
+
+- Fer obres interactives amb el públic, on aquest puga fer votacions, mitjançant el seu mòbil, i d'aquesta forma poder canviar el desenllaç de l'obra en temps real.
+
+En definitiva, si es configura una xarxa en la sala, poder traure tot el rendiment possible, ja que en l'actualitat tot el món té un mòbil damunt.
+  
+## Organització dels diferents apartats de les fulles
+
+## Alternativa, merege WordPress
+
+En cas contrari, es miraria la forma de combinar els 5 WordPress en un sol, fer [merge wordpress](https://wpmudev.com/blog/merging-wordpress-sites/)
+  `mirar que més alternatives hi ha.`

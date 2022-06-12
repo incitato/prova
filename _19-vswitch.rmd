@@ -1,0 +1,216 @@
+# Open vswitch
+
+[Open vswitch](https://www.openvswitch.org/)
+
+[Emllaç explicacio](https://webworxshop.com/virtualised-pfsense-on-proxmox-with-open-vswitch/)
+
+El tallafoc és un sistema pfSense virtualitzat que s'executa en un host Proxmox,
+faig servir Open vSwitch a la meva configuració pfSense/Proxmox,Tot el trànsit entre VLAN i Internet de la meva xarxa passa per aci.
+
+## Funcionament
+
+La premissa bàsica de tot això és un amfitrió Proxmox amb dues NIC físiques. Un d'aquests és el port LAN on l'amfitrió tindrà la seva IP interna. El segon és el port WAN, que s'assigna directament a la màquina virtual pfSense. 
+
+la interfície WAN s'assigna directament a la màquina virtual, tot això es gestiona internament a pfSense. Això vol dir que la màquina host no està exposada a la xarxa externa. ( això no és estrictament cert. L'amfitrió s'exposarà als nivells inferiors de la pila de xarxa per permetre-li reenviar paquets a la màquina virtual. Tanmateix, com que no té una adreça IP en aquesta interfície, no es podrà accedir des d'Internet.)
+
+Al costat de la LAN, creem un commutador Open vSwitch i hi afegim la interfície LAN com a tronc de VLAN. Una altra interfície troncal (virtual) entra a la VM pfSense i es converteix en la seva interfície LAN. Aço, ens permet connectar altres màquines virtuals de l'amfitrió al vSwitch. Aquests poden estar en diverses VLAN diferents.
+
+![pfsense Proxmox](imatges/pfsense_proxmox.png)
+
+## Configuració de la xarxa Proxmox
+
+Proxmox enumera les dues NIC com a ens1(LAN) i enp1s0(WAN). Amb el port WAN, vaig crear un pont Linux senzill vmbr1per permetre que s'afegeixi a la VM pfSense.
+
+Al costat de la LAN, vaig crear un port "OVS Bridge" i vaig afegir un "OVS IntPort" anomenat adminque serà la interfície principal de la màquina amfitriona. Com a tal, a aquesta interfície se li assigna una IP estàtica i s'assigna a la VLAN on volem que estigui l'amfitrió.
+
+> **nota**
+Per disseny, Proxmox no aplica cap canvi de xarxa fins que reinicieu. Això és molt útil per evitar que et bloquegin. Si esteu connectat directament a la interfície LAN (amb una IP estàtica), hauríeu d'assegurar-vos que tot sigui correcte abans de reiniciar. Després del reinici, torneu a configurar la vostra interfície local a la VLAN que heu triat a la configuració i una IP estàtica. Aleshores hauríeu de poder accedir de nou a la interfície web de Proxmox.
+
+## Configuració de pfSense
+
+> **nota**
+Vaig seleccionar un processador "Westmere" per posar les instruccions  
+AES-NI disponibles per a la VM
+
+## Xarxa pfSense
+
+la meva connexió WAN. Primer vaig afegir una VLAN amb l'etiqueta 10 al vtnet0dispositiu, que és el dispositiu que correspon al pont WAN físic tal com enumera pfSense.
+
+?
+El segon avantatge important és que puc executar màquines virtuals i contenidors addicionals a la màquina amfitriona, cosa que no podia quan era un tallafoc dedicat. He utilitzat això per implementar la meva petita DMZ per als serveis d'Internet. Això té l'avantatge afegit que el trànsit DMZ només transita el vSwitch intern a l'amfitrió i no s'ha de moure d'anada i tornada per la infraestructura de xarxa física. 
+
+[mirar aço ZFS](https://webworxshop.com/tag/pfsense/)
+
+
+### vlans
+
+* La xarxa LAN principal, allotja els dispositius client de confiança (ordinadors portàtils, telèfons intel·ligents, etc.). Aquesta xarxa té accés a la majoria de les altres amb finalitats de manteniment.
+* La xarxa IOT, que allotja dispositius intel·ligents que requereixen absolutament accés a Internet. De moment, això és només el meu Smart TV, Neato Botvac i un Chromecast Ultra. El Neato és l'únic dispositiu que utilitza la WLAN associada. Aquesta xarxa està protegida de totes les altres, però pot accedir a Internet.
+* The NOT (Network of Things - nom robat de la sèrie de vídeos The Hook Up , enllaçat més amunt). Allotja dispositius intel·ligents que es controlen localment, com ara els meus dispositius ESPHome. Alguns dels dispositius d'aquesta xarxa (com ara les meves bombetes Yeelight , Milight Gateway i Broadlink RM Mini ) volen connectar-se a Internet però estan bloquejats pel tallafoc. Per facilitar-ne l'ús, poso la VM que allotja els meus serveis de domòtica en aquesta xarxa i en faig una excepció al tallafoc. Espero canviar això eventualment. Aquesta xarxa està bloquejada tant de les altres xarxes locals com d'Internet, a part d'algunes excepcions.
+* La xarxa de mitjans, allotja tots els dispositius i servidors que transmeten contingut multimèdia a casa meva. Això inclou els meus sistemes Kodi, un HDHomerun antic i els servidors Emby , tvheadend i Mopidy / Snapcast . De moment, l'RPi que condueix els meus altaveus exteriors viu a la xarxa NOT. Això es deu al fet que està en wifi i no volia crear-ne un altre AP. Finalment, es migrarà, una vegada que faci passar un cable al sostre. Tenir els dispositius multimèdia en una VLAN separada m'hauria de permetre fer una mica de configuració del trànsit en el futur per prioritzar-ne el trànsit (si cal, ara mateix no tinc cap problema). Aquesta xarxa no està bloquejada de cap de les altres i té accés a Internet.
+* La DMZ, allotja tots els serveis que estiguin disponibles fora de la meva xarxa. Està bloquejat a totes les xarxes locals, però té accés a Internet.
+* La xarxa de convidats, que està lligada directament a una WLAN específica només per a dispositius convidats. Això em permet proporcionar accés a Internet als hostes sense donar-los accés a res més. Bloquejat de totes les xarxes locals, però òbviament té accés a Internet.
+
+## open vswitch en Ubuntu
+
+[ovs-toolbox](https://github.com/nbonnand/ovs-toolbox)
+
+Abans de passar a proxmox, farem les proves en ubuntu, com si aquest fora del hypervisor
+
+Passem a instal.lar open switch
+```bash
+sudo apt install openvswitch-switch
+```
+
+[segons](https://www.xmodulo.com/install-configure-kvm-open-vswitch-ubuntu-debian.html)
+
+Dependencies 
+
+```bash
+sudo apt-get install build-essential libssl-dev linux-headers-$(uname -r)
+```
+
+Hi ha un paquet en snap, fen esta instal.lacio.
+
+```bash
+sudo snap install openvswitch --edge
+```
+> $ sudo openvswitch.ovs-vsctl show
+a7a5dae8-3c0c-4f81-a410-5cbf88f8a946
+    ovs_version: "2.17.0"
+
+[Gui ovs-toolbox](https://github.com/nbonnand/ovs-toolbox)
+
+[mirar laboratoris de xarxes](https://leftasexercise.com/2020/01/10/virtual-networking-labs-open-vswitch-in-practice/)
+
+creem 4 targetes de xarxa
+[mirar CONFIGURING VIRTUALBOX VMS FOR OPENVSWITCH NETWORKING ](https://sites.google.com/site/nandydandyoracle/openvswitch-ovs/configuring-virtualbox-vms-for-openvswitch-networking)
+
+```bash
+sudo ip tuntap add s1 mode tap
+sudo ip tuntap add s2 mode tap
+sudo ip tuntap add s3 mode tap
+sudo ip tuntap add s4 mode tap
+```
+les alcem
+```bash
+sudo ip link set s1 up 
+sudo ip link set s2 up 
+sudo ip link set s3 up 
+sudo ip link set s4 up
+```
+fem un pont en open vswitch o un switch ara no se
+```bash
+sudo ip link set s1 up 
+```
+li afegim els ports
+```bash
+sudo openvswitch.ovs-vsctl add-port sw1 s1
+sudo openvswitch.ovs-vsctl add-port sw1 s2
+...
+```
+el conectem a venp3s0 la tarjeta de xarxa del servidor, en este cas el meu host que anira el switch fisic real, on estan conectades les cameres, les antenes wifi ....
+
+```bash
+ sudo openvswitch.ovs-vsctl add-port sw1 enp3s0
+```
+
+alcem es switch
+```bash
+sudo ip link set up dev sw1
+```
+li donem ip al switch
+```bash
+sudo ip addr add 172.16.40.1/24 dev sw1
+```
+fem un trunk a la vlan400
+```bash
+sudo openvswitch.ovs-vsctl set port sw1 trunks=400
+```
+
+el afegim al la vlan400
+```bash
+sudo openvswitch.ovs-vsctl set port sw1 tag=400
+```
+i afegim aquests ports a la vlan400
+```bash
+sudo openvswitch.ovs-vsctl set port s1 tag=400
+sudo openvswitch.ovs-vsctl set port s2 tag=400
+sudo openvswitch.ovs-vsctl set port s3 tag=400
+sudo openvswitch.ovs-vsctl set port s4 tag=400
+...
+```
+ara tenim 
+```bash
+sudo openvswitch.ovs-vsctl show
+a7a5dae8-3c0c-4f81-a410-5cbf88f8a946
+    Bridge sw1
+        Port s6
+            tag: 400
+            Interface s6
+        Port s3
+            tag: 400
+            Interface s3
+        Port s5
+            tag: 400
+            Interface s5
+        Port s2
+            tag: 400
+            Interface s2
+        Port s1
+            tag: 400
+            Interface s1
+        Port s4
+            tag: 400
+            Interface s4
+        Port sw1
+            tag: 400
+            trunks: [400]
+            Interface sw1
+                type: internal1
+    ovs_version: "2.17.0"
+```
+
+llllllalallallala
+
+
+
+Commands used in this video:
+* show ovs current config summary
+ovs-vsctl show
+
+* add a bridge
+ovs-vsctl add-br mybridge 
+
+* turn up mybridge interface
+ifconfig mybridge up
+
+* add eth0
+ovs-vsctl add-port mybridge eth0
+
+* remove eth0's IP addressing
+ifconfig eth0 0
+
+* make mybridge interface get a DHCP IP
+dhclient mybridge
+
+* add tap interfaces
+ip tuntap add mode tap vport1
+ip tuntap add mode tap vport 2
+
+* add tap interfaces to mybridge
+ovs-vsctl add-port mybridge vport1 -- add-port mybridge vport2
+
+* view forwarding table (mac address table)
+ovs-appctl fdb/show
+
+* see mapping of OpenFlow ports to system ports
+ovs-ofctl show mybridge
+
+* see flow entries (OpenFlow) on mybridge
+ovs-ofctl dump-flows mybridge
+
+* see records in ovsdb-server tables
+ovs-vsctl list Bridge
+ovs-vsctl list Port
+ovs-vsctl list Interface

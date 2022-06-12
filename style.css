@@ -1,0 +1,135 @@
+p.caption {
+    color: #777;
+    margin-top: 10px;
+}
+
+p code {
+    white-space: inherit;
+}
+
+pre {
+    word-break: break-word;
+    word-wrap: break-word;
+    background-color: #f7f7f7;
+}
+
+pre code {
+    white-space: inherit;
+}
+
+p.flushright {
+    text-align: right;
+}
+
+.rmdnote {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    background: rgba(119, 136, 153, 0.1) 5px center/3em no-repeat;
+    border: 2px solid rgba(119, 136, 153, 0.3);
+    border-radius: 10px;
+    background-image: url("imatges/note.png");
+}
+
+.rmdtip {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    background: rgba(81, 183, 73, 0.1) 5px center/3em no-repeat;
+    border: 2px solid rgba(81, 183, 73, 0.5);
+    border-radius: 10px;
+    background-image: url("imatges/tip.png");
+}
+
+.rmdwarn {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    background: rgba(255, 83, 59, 0.1) 5px center/3em no-repeat;
+    border: 2px solid rgba(255, 83, 59, 0.5);
+    border-radius: 10px;
+    background-image: url("imatges/warning.png");
+}
+
+.rmdinfo {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    background: rgba(92, 122, 234, 0.1) 5px center/3em no-repeat;
+    border: 2px solid rgba(92, 122, 234, 0.5);
+    border-radius: 10px;
+    background-image: url("imatges/important.png");
+}
+
+.rmdcuidao {
+    padding: 1em 1em 1em 4em;
+    margin-bottom: 10px;
+    background: rgba(251, 188, 5, 0.1) 5px center/3em no-repeat;
+    border: 2px solid rgba(251, 188, 5, 0.5);
+    border-radius: 10px;
+    background-image: url("imatges/caution.png");
+}
+
+.figure {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+figcaption {
+    color: #bbb;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px rgba(0.1, 0.5, 0, 0.20);
+}
+
+p.caption {
+    color: #bbb;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.dreta {
+    text-align: right;
+}
+
+.centre {
+    text-align: center;
+}
+
+blockquote>p:last-child {
+    text-align: right;
+}
+
+blockquote>p:first-child {
+    text-align: inherit;
+}
+
+.columns {
+    display: flex;
+}
+
+.book .book-body .page-wrapper .page-inner section.normal {
+    display: block;
+    word-wrap: break-word;
+    overflow: hidden;
+    color: #333;
+    line-height: 1.7;
+    text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+}
+
+.book .book-body .page-wrapper .page-inner {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px 0 40px;
+}
+
+*/

@@ -1,0 +1,19 @@
+# Remodelat de la fulla web de *Espacio Inestable*
+
+## Reformulació de les estratègies de venda d'entrades
+
+L'estratègia de la venda d'entrades, és gestionada per una empresa de venda d'actes, es planteja la possibilitat de migrar a una altra plataforma o autogestió d'aquestes.
+
+## Instal·lació del plugin de venda d'entrades i tema per a la fulla web
+
+Es recomana d'implementació d'una solució com la que és té en aquesta fulla, on podem veure una demostració de les seues funcions.[ticketera](https://tickera.com/demos/theater-demo/)
+
+En aquest plugin per a WordPress, tenim la possibilitat de configurar les nostres entrades, afegint imatge de l'obra, inclusió de codis Qr (per al wifi), implantar la compra d'entrades, amb selecció de la cadira en el pati de butaques.
+
+S'hauria de contractar els serveis de [stripe](https://stripe.com/en-es), la passerella de cobrament. El [preu](https://stripe.com/en-es/pricing) és 1,4% +0,25 €, la configuració en WordPress és molt fàcil, i el tema i el plugin ja estan preparats.
+
+Una altra part interessant d'aquest plugin, és la possibilitat de validació d'entrades mitjançant un codi Qr, que funciona en una aplicació de movil, actualitzant la base de dades d'assistència real a l'acte.
+
+## Tasques a fer
+
+Configurar el tema de la fula web perquè tinga l'aspecte desitjat, es podria comprar també un tema que ofereixen en la mateixa ticketera dissenyat expressament per a [teatres](https://tickera.com/demos/theater-demo/) i actes.

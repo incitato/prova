@@ -1,0 +1,27 @@
+# provant el shell
+
+[bash comadaments](https://bash-intro.rsquaredacademy.com/command-line-regular-expression.html)
+
+funciona
+
+```{sh, echo = FALSE}
+sshpass -p "inestable" ssh incitato@192.168.0.102 ip a
+```
+
+funciona
+
+```{sh, echo = FALSE}
+sshpass -p "inestable" ssh incitato@192.168.0.102 cat /etc/passwd
+```
+
+funciona
+
+```{sh, echo = FALSE}
+sshpass -p "inestable" ssh incitato@192.168.0.102 "echo hola3 >> ll"
+```
+
+funciona
+
+```{sh, echo = FALSE}
+sshpass -p "inestable" ssh incitato@192.168.0.102 "echo hola3 >> ll; echo el que hi ha en el arxiu ll;echo; cat ll;echo;echo fem un ls -la;echo; ls -la"
+```

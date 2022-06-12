@@ -1,0 +1,82 @@
+\usepackage{booktabs}
+\usepackage[catalan]{babel}
+\usepackage{longtable}
+
+%no se  ue fan
+%\usepackage[bf,singlelinecheck=off]{caption}
+%\usepackage{Alegreya}
+%\usepackage[scale=.7]{sourcecodepro}
+%\usepackage{framed,color}
+
+\usepackage[skins]{tcolorbox}
+
+\definecolor{colortip}{RGB}{81,183,73}
+\definecolor{colornote}{RGB}{119,136,153}
+\definecolor{colorwarn}{RGB}{255,83,59}
+\definecolor{colorinfo}{RGB}{92, 122, 234}
+\definecolor{colorcuidao}{RGB}{251,188,5}
+
+\tcbset{
+  colbacktitle=white,
+  enhanced,
+  boxrule=9pt,
+  sharp corners,
+  attach boxed title to top left={yshift=-1.5mm, xshift=5mm},
+  colback=white, 
+  coltext=black, 
+  leftrule=.3mm,
+  rightrule=.3mm,
+  bottomrule=.3mm,
+  toprule=.3mm,
+  boxsep=1pt, 
+  arc=4pt 
+}
+\newtcolorbox{rmdcuidao}[1]{
+  title=#1,
+  drop small lifted shadow,
+  coltitle=colorcuidao,
+  colframe=colorcuidao, 
+  colback=colorcuidao!5!
+}
+\newtcolorbox{rmdtip}[1]{
+  title=#1,
+  drop small lifted shadow,
+  coltitle=colortip,
+  colframe=colortip, 
+  colback=colortip!5!
+}
+
+\newtcolorbox{rmdnote}[1]{
+  title=#1,
+  drop small lifted shadow,
+  coltitle=colornote,
+  colframe=colornote,
+  colback=colornote!5!
+}
+
+\newtcolorbox{rmdwarn}[1]{
+  title=#1,
+  drop small lifted shadow,
+  coltitle=colorwarn,
+  colframe=colorwarn,
+  colback=colorwarn!5!
+}
+
+\newtcolorbox{rmdinfo}{
+  drop small lifted shadow,
+  coltitle=colorinfo,
+  colframe=colorinfo,
+  colback=colorinfo!5!,
+  %capture=hbox
+}
+
+%\makeatother
+% marca d'aigua
+% https://github.com/callegar/LaTeX-draftwatermark
+% https://github.com/callegar/LaTeX-everypage
+% https://ctan.org/pkg/draftwatermark
+% draftwatermark espacio inestable everypage
+%\usepackage[angle=270,text=Espacio\ inestable,color=gray,pos={0.5in,3.5in},scale=0.25]{draftwatermark}
+% draftwatermark 和 everypage 由同一个人维护，后者将停止维护
+% https://github.com/CTeX-org/ctex-kit/issues/331
+%\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}

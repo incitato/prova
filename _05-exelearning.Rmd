@@ -1,0 +1,22 @@
+# Implantació de projectes Exelearning
+
+[Exelearning](https://exelearning.net/ca) és una eina d’autor de codi obert per ajudar als docents en la creació i publicació de continguts web.
+
+## Proposta d'implantar donar cursos en la sala o patrocinats per la mateixa
+
+Una de les activitats de l'empresa és en l'entorn educatiu, de la realització d'obres de teatre en instituts i col·legis. Una bona forma d'introduir la digitalització en les arts escèniques, seria preparar cursos introductors a l'obra que es vol representar. El professorat els poguera impartir abans de la seua representació, i anar preparant als alumnes del que van a veure, o fer cursos o jocs interactius post espectacle per reforçar el missatge que es vol transmetre.
+
+## Funcionament d'exelearning
+
+Anem a [descàrregues](https://exelearning.net/ca/descarregues/) per obtenir el programa per a la plataforma on vulguem construir el projecte.
+En el següent enllaç [**Documentació**](https://descargas.intef.es/cedec/exe_learning/Manuales/manual_exe26/), tenim una explicació de com funciona i les possibilitats d'exportar el projecte siga a la nostra fulla o a espais gratuïts d'allotjament de contingut educatiu que després podem enllaçar.
+
+### Llocs on podem penjar el material educatiu
+
+- [BSCW (Basic Support for Cooperative Work)](https://public.bscw.de/pub/)
+- [Graasp](https://graasp.eu/) Pertany a la comunitat europea i la seua finalitat és crear i allotjar material educatiu.
+- [Vish](http://vishub.org/) Xarxa social educativa per la creació de recursos educatius.
+
+## Possible implantació d'una plataforma Moodle
+
+Si es volguera anar un poc més lluny, es podria implantar una plataforma Moodle, per donar cursos relacionats en les arts escèniques, on es colgaria material, hi ha diversos allotjaments on podem penjar el nostre Moodle a preus raonables, per fer un curs que ens interesse en un moment donat, mirar [Best Moodle Allotjament Services](https://www.hostingadvice.com/how-to/best-moodle-hosting/)
